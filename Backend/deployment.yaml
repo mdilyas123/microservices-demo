@@ -15,6 +15,11 @@ spec:
       containers:
       - name: backend
         image: node:18
-        command: ["sh", "-c", "npm install -g json-server && json-server --watch /data/db.json --host 0.0.0.0"]
+        command: ["sh", "-c"]
+        args:
+          - |
+            npm install -g json-server &&
+            echo '{"posts":[{"id":1,"title":"Hello DevOps"}]}' > db.json &&
+            json-server --watch db.json --host 0.0.0.0
         ports:
-        - containerPort: 3000
+          - containerPort: 3000
